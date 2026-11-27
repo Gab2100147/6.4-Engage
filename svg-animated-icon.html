@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SVG Animated Icon - Rocket</title>
+<style>
+  body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #f2f2f2; font-family: Arial, sans-serif; }
+  h1 { margin: 0 0 12px; font-size: 22px; }
+  svg { border-radius: 24px; box-shadow: 0 4px 14px rgba(0,0,0,.35); }
+
+  /* rocket floats and trembles a little */
+  .rocket { animation: float 2.4s ease-in-out infinite; }
+  @keyframes float {
+    0%, 100% { transform: translateY(6px) rotate(-1.5deg); }
+    50%      { transform: translateY(-10px) rotate(1.5deg); }
+  }
+  .rocket { transform-box: fill-box; transform-origin: center; }
+
+  /* flame flickers */
+  .flame, .flame-core { transform-box: fill-box; transform-origin: top center; animation: flicker .18s ease-in-out infinite alternate; }
+  .flame-core { animation-duration: .12s; }
+  @keyframes flicker {
+    from { transform: scaleY(.8) scaleX(.95); }
+    to   { transform: scaleY(1.25) scaleX(1.05); }
+  }
+
+  /* stars twinkle */
+  .star { animation: twinkle 2s ease-in-out infinite; }
+  .s2 { animation-delay: .4s; } .s3 { animation-delay: .9s; }
+  .s4 { animation-delay: 1.3s; } .s5 { animation-delay: .7s; }
+  @keyframes twinkle { 0%,100% { opacity: .2; } 50% { opacity: 1; } }
+
+  /* speed lines stream downward */
+  .speed { animation: stream 1s linear infinite; }
+  .l2 { animation-delay: .3s; } .l3 { animation-delay: .6s; } .l4 { animation-delay: .15s; } .l5 { animation-delay: .8s; }
+  @keyframes stream {
+    0%   { transform: translateY(-40px); opacity: 0; }
+    30%  { opacity: .8; }
+    100% { transform: translateY(70px); opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rocket, .flame, .flame-core, .star, .speed { animation: none; }
+  }
+</style>
+</head>
+<body>
+<h1>Animated Rocket Icon</h1>
+
+<svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated rocket flying through space">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b1033"/>
+      <stop offset="1" stop-color="#3b1f6b"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e8ecf5"/>
+      <stop offset="1" stop-color="#aab4cc"/>
+    </linearGradient>
+    <clipPath id="frame"><rect width="300" height="300" rx="24"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#frame)">
+    <rect width="300" height="300" fill="url(#sky)"/>
+
+    <!-- twinkling stars -->
+    <circle class="star" cx="40" cy="45" r="2.5" fill="#fff"/>
+    <circle class="star s2" cx="250" cy="60" r="3" fill="#fff"/>
+    <circle class="star s3" cx="70" cy="150" r="2" fill="#ffe9a8"/>
+    <circle class="star s4" cx="245" cy="170" r="2.5" fill="#fff"/>
+    <circle class="star s5" cx="200" cy="30" r="2" fill="#ffe9a8"/>
+
+    <!-- speed lines -->
+    <g stroke="#cdd6ff" stroke-width="3" stroke-linecap="round">
+      <line class="speed" x1="60" y1="190" x2="60" y2="215"/>
+      <line class="speed l2" x1="100" y1="210" x2="100" y2="240"/>
+      <line class="speed l3" x1="205" y1="200" x2="205" y2="228"/>
+      <line class="speed l4" x1="245" y1="215" x2="245" y2="245"/>
+      <line class="speed l5" x1="30" y1="230" x2="30" y2="252"/>
+    </g>
+
+    <!-- planet -->
+    <ellipse cx="150" cy="330" rx="190" ry="60" fill="#2a1450"/>
+    <ellipse cx="150" cy="340" rx="190" ry="60" fill="#1b0c38"/>
+
+    <!-- rocket -->
+    <g class="rocket">
+      <!-- flame -->
+      <path class="flame" d="M136 202 Q150 275 164 202 Z" fill="#ff7a1a"/>
+      <path class="flame-core" d="M142 202 Q150 250 158 202 Z" fill="#ffe14d"/>
+      <!-- fins -->
+      <path d="M121 150 L86 205 L121 190 Z" fill="#e8344e"/>
+      <path d="M179 150 L214 205 L179 190 Z" fill="#e8344e"/>
+      <!-- body -->
+      <path d="M150 45 C188 82 192 140 180 192 L120 192 C108 140 112 82 150 45 Z" fill="url(#body)" stroke="#8a94ad" stroke-width="2"/>
+      <!-- nose cone -->
+      <path d="M150 45 C163 58 172 72 176 88 L124 88 C128 72 137 58 150 45 Z" fill="#e8344e"/>
+      <!-- window -->
+      <circle cx="150" cy="120" r="19" fill="#5a6580"/>
+      <circle cx="150" cy="120" r="14" fill="#6fd3ff"/>
+      <circle cx="144" cy="114" r="4" fill="#fff" opacity=".7"/>
+      <!-- stripes and nozzle -->
+      <rect x="121" y="162" width="58" height="8" fill="#e8344e"/>
+      <rect x="134" y="192" width="32" height="12" rx="2" fill="#6b7590"/>
+    </g>
+  </g>
+</svg>
+</body>
+</html>
